@@ -11,7 +11,7 @@
         <h1>Welcome to the User Page</h1>
 
         <script>
-            // Extract user information from the query parameters
+
             var params = new URLSearchParams(window.location.search);
             var name = params.get('name');
             var age = params.get('age');
@@ -19,7 +19,6 @@
             var email = params.get('email');
             var phone = params.get('phone');
 
-            // Display user information on the page
             document.write('<p><strong>Name:</strong> ' + name + '</p>');
             document.write('<p><strong>Age:</strong> ' + age + '</p>');
             document.write('<p><strong>Gender:</strong> ' + gender + '</p>');

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Portal</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #login-form {
+      max-width: 400px;
+      width: 100%;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    input[type="checkbox"] {
+      margin-top: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #create-account {
+      margin-top: 15px;
+      color: #333;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #qrcode {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="login-form">
+  <h2>Login</h2>
+  <form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+   
+    <button type="button" onclick="validateLogin()">Login</button>
+  </form>
+
+  
+
+<script src=" https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example"></script>
+<script>
+  let instascanScanner;
+
+  function validateLogin() {
+    const teacherCredentials = { username: 'admin', password: 'admin@123' };
+    const studentCredentials = { username: 'users', password: 'user@123' };
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === teacherCredentials.username && password === teacherCredentials.password) {
+      window.location.href = 'teacher_interface.html';
+    } else if (username === studentCredentials.username && password === studentCredentials.password) {
+      window.location.href = 'student_interface.html';
+    } else {
+      alert('Invalid username or password. Please try again.');
+    }
+  }
+
+  function togglePassword() {
+    const passwordField = document.getElementById('password');
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+    } else {
+      passwordField.type = 'password';
+    }
+  }
+</script>
+
+</body>
+</html>

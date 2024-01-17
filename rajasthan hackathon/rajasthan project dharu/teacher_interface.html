@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdn.rawgit.com/neocotic/qrious/master/dist/qrious.min.js"></script>
+    <style>
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .center-image img {
+            opacity: 0.3;
+        }
+
+        .usercomp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Reports</a>
+    </nav>
+
+    <div class="center-image">
+        <img src="Rajasthan_Police_Logo.png" alt="Rajasthan Police Logo">
+    </div>
+
+    <section class="usercomp">
+        <button onclick="showUserDetails()">Show User Details</button>
+
+        <script>
+            function showUserDetails() {
+                // Assuming the table with user details has an ID 'userDetailsTable'
+                const userDetailsTable = document.getElementById('userDetailsTable');
+
+                // If the table is not generated, generate and append it
+                if (!userDetailsTable) {
+                    const userDetails = generateRandomUserDetails(100);
+                    const table = document.createElement('table');
+                    table.id = 'userDetailsTable';
+
+                    // Add table header
+                    const headerRow = table.insertRow();
+                    const headerColumns = ['Username', 'Gender', 'Age', 'User Gmail ID', 'Phone Number'];
+
+                    for (const headerText of headerColumns) {
+                        const headerCell = headerRow.insertCell();
+                        headerCell.textContent = headerText;
+                    }
+
+                    // Add user details rows
+                    for (const userDetail of userDetails) {
+                        const row = table.insertRow();
+                        for (const data of userDetail) {
+                            const cell = row.insertCell();
+                            cell.textContent = data;
+                        }
+                    }
+
+                    // Display the table in the usercomp section
+                    document.querySelector('.usercomp').appendChild(table);
+                }
+            }
+
+            function generateRandomUserDetails(count) {
+                const userDetails = [];
+                for (let i = 0; i < count; i++) {
+                    const username = `User${i + 1}`;
+                    const gender = Math.random() < 0.5 ? 'Male' : 'Female';
+                    const age = Math.floor(Math.random() * (70 - 10 + 1)) + 10;
+                    const gmailId = `user${i + 1}@gmail.com`;
+                    const phoneNumber = generateRandomPhoneNumber();
+
+                    userDetails.push([username, gender, age, gmailId, phoneNumber]);
+                }
+                return userDetails;
+            }
+
+            function generateRandomPhoneNumber() {
+                const digits = Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join('');
+                return `+91 843-${digits.substr(0, 3)}-${digits.substr(3, 4)}`;
+            }
+        </script>
+    </section>
+</body>
+</html>

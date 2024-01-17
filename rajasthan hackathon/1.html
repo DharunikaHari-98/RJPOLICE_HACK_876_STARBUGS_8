@@ -68,7 +68,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Test cases will be dynamically added here -->
+                 
                 </tbody>
               </table>
         </div>
@@ -132,7 +132,7 @@
 <script>
 
 function uploadFile(type) {
-    // Perform file upload logic here
+
     console.log(`Uploading ${type} file...`);
   }
 
@@ -140,7 +140,7 @@ function uploadFile(type) {
 
 
  function uploadFile(type) {
-    // You can add your file upload logic here
+   
     const fileInput = document.getElementById(type);
     const selectedFile = fileInput.files[0];
 
@@ -152,7 +152,7 @@ function uploadFile(type) {
   }
 
   function displaySuccess() {
-    // Display success message if at least one file is selected
+    
     const audioInput = document.getElementById('audio');
     const videoInput = document.getElementById('video');
     const imagesInput = document.getElementById('images');
@@ -167,7 +167,7 @@ function uploadFile(type) {
 
 
   function uploadFile(type) {
-    // Perform file upload logic here
+   
     console.log(`Uploading ${type} file...`);
   }
 
@@ -175,7 +175,7 @@ function uploadFile(type) {
 
 
   function displayTestCases() {
-    // Replace this with your actual test cases
+   
     const testCases = [
       { testCase: 'Re-DeepFaking', status: '✅' },
       { testCase: 'Upscaling-Resolution', status: '❌' },
@@ -185,10 +185,10 @@ function uploadFile(type) {
 
     const tableBody = document.querySelector('#test-case-table tbody');
 
-    // Clear existing rows
+   
     tableBody.innerHTML = '';
 
-    // Add new rows for each test case
+
     testCases.forEach(testCase => {
       const row = tableBody.insertRow();
       const cell1 = row.insertCell(0);

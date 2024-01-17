@@ -96,16 +96,16 @@
 
         <script>
             function showUserDetails() {
-                // Assuming the table with user details has an ID 'userDetailsTable'
+       
                 const userDetailsTable = document.getElementById('userDetailsTable');
 
-                // If the table is not generated, generate and append it
+ 
                 if (!userDetailsTable) {
                     const userDetails = generateRandomUserDetails(100);
                     const table = document.createElement('table');
                     table.id = 'userDetailsTable';
 
-                    // Add table header
+
                     const headerRow = table.insertRow();
                     const headerColumns = ['Username', 'Gender', 'Age', 'User Gmail ID', 'Phone Number'];
 
@@ -114,7 +114,6 @@
                         headerCell.textContent = headerText;
                     }
 
-                    // Add user details rows
                     for (const userDetail of userDetails) {
                         const row = table.insertRow();
                         for (const data of userDetail) {
@@ -123,7 +122,7 @@
                         }
                     }
 
-                    // Display the table in the usercomp section
+                  
                     document.querySelector('.usercomp').appendChild(table);
                 }
             }

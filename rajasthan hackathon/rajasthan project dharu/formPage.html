@@ -35,14 +35,14 @@
 
         <script>
             function generateUserPage() {
-                // Collect user inputs
+
                 var name = document.getElementById('name').value;
                 var age = document.getElementById('age').value;
                 var gender = document.getElementById('gender').value;
                 var email = document.getElementById('email').value;
                 var phone = document.getElementById('phone').value;
 
-                // Create a URL with user inputs as query parameters
+
                 var redirectURL = 'userPage.html' +
                     '?name=' + encodeURIComponent(name) +
                     '&age=' + encodeURIComponent(age) +
@@ -50,10 +50,8 @@
                     '&email=' + encodeURIComponent(email) +
                     '&phone=' + encodeURIComponent(phone);
 
-                // Redirect to the new page
                 window.location.href = redirectURL;
 
-                // Prevent the form from submitting
                 return false;
             }
         </script>

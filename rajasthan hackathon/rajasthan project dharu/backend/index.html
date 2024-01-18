@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Manipulation Detection</title>
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .jumbotron {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #outputImage {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Image Manipulation Detection</h1>
+            <p class="lead">Upload an image to detect manipulation</p>
+        </div>
+
+        <form id="imageForm" enctype="multipart/form-data">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imageInput" accept="image/*" required>
+                <label class="custom-file-label" for="imageInput">Choose Image</label>
+            </div>
+            <button type="button" class="btn btn-primary mt-3" onclick="processImage()">Detect Manipulation</button>
+        </form>
+
+        <div id="result" class="text-center">
+            <h2 class="mt-4">Detection Result:</h2>
+            <p id="fakeStatus" class="lead"></p>
+            <img id="outputImage" src="" alt="Processed Image">
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function processImage() {
+            var formData = new FormData(document.getElementById('imageForm'));
+
+            fetch('/detect', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var resultDiv = document.getElementById('result');
+                var fakeStatus = document.getElementById('fakeStatus');
+                var outputImage = document.getElementById('outputImage');
+
+                if (data.is_fake) {
+                    fakeStatus.innerText = 'This image is likely to be manipulated.';
+                    fakeStatus.style.color = 'red';
+                } else {
+                    fakeStatus.innerText = 'This image is likely authentic.';
+                    fakeStatus.style.color = 'green';
+                }
+
+                outputImage.src = data.processed_image;
+                resultDiv.style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Update file input label
+        $('#imageInput').on('change', function() {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').html(fileName);
+        });
+    </script>
+</body>
+</html>
